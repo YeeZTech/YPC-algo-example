@@ -1,0 +1,3 @@
+
+def ypc_install_dir():
+    return '@YPC_INSTALL_DIR@'
