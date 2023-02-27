@@ -1,3 +1,7 @@
 
-def ypc_install_dir():
-    return '@YPC_INSTALL_DIR@'
+def ypc_include_dir():
+    return '@YPC_INCLUDE_DIR@'
+
+
+def ypc_lib_dir():
+    return '@YPC_LIB_DIR@'

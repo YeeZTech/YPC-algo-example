@@ -12,8 +12,8 @@ example_dir = os.path.dirname(integrate_dir).replace(" ", "\ ")
 example_bin = os.path.join(example_dir, "./bin")
 example_lib = os.path.join(example_dir, "./lib")
 
-ypc_bin = os.path.join(project.ypc_install_dir(), "./bin")
-ypc_lib = os.path.join(project.ypc_install_dir(), "./lib")
+ypc_lib = os.path.join(project.ypc_lib_dir(), "./")
+ypc_bin = os.path.join(ypc_lib, "../bin")
 
 kmgr_enclave = {
     'stdeth': os.path.join(ypc_lib, "keymgr.signed.so"),
