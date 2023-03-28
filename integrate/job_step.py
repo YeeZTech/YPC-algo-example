@@ -71,12 +71,12 @@ class job_step:
         with open(forward_result, 'r') as of:
             return json.load(of)
 
-    def generate_request(crypto, input_param, shukey_file, param_output_url, config):
+    def generate_request(crypto, input_param, param_format, shukey_file, param_output_url, config):
         param = {
             "crypto": crypto,
             "request": "",
             "use-param": input_param,
-            "param-format": "text",
+            "param-format": param_format,
             "use-publickey-file": shukey_file,
             "output": param_output_url
         }

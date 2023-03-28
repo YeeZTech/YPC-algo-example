@@ -1,5 +1,4 @@
 #!/usr/bin/python3
-import common
 import json
 from job_step import job_step
 
@@ -73,7 +72,7 @@ class classic_job:
         # 4.1 call terminus to generate request
         param_output_url = self.name + "_param.json"
         param_json = job_step.generate_request(
-            self.crypto, self.input, key_file, param_output_url, self.config)
+            self.crypto, self.input, "text", key_file, param_output_url, self.config)
         summary['analyzer-input'] = param_json["encrypted-input"]
         self.all_outputs.append(param_output_url)
 
