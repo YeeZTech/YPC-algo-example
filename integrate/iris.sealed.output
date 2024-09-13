@@ -1,0 +1,5 @@
+data_url = /home/ubuntu/src/YPC-algo-example/./bin/iris.data
+sealed_data_url = iris.sealed
+public_key = ec97d4f5d2fbf37e88be1473fb6555467249b3b0c70a220f66ed3041169d2979d1ab73fc273fed37009ef67880cf6d5df1e4e314a73f7d0557cba2572c45b4f2
+data_id = e5fa855fc525c9560b4e9e4127f5047941a89d61aed2ce749660d352fd74cdfc
+item_num = 150

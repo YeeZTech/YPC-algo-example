@@ -1,0 +1,2 @@
+add_library(reader_csv_reader SHARED reader.cpp)
+target_link_libraries(reader_csv_reader pthread ff_net)

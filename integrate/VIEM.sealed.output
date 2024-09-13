@@ -1,0 +1,5 @@
+data_url = /home/ubuntu/src/YPC-algo-example/./bin/image/BaboonRGB.bmp
+sealed_data_url = VIEM.sealed
+public_key = 753ea747b1e90ac5b333a6601385685b7b2e3913ed821d39c8f5c3b57eb06cc0356f3dc2fecadd85f3901ee77fda9cd96449ad607be1e648af1634219d286658
+data_id = 9f43e1457444610917d95fb29ae6d1a6280c59b323e99d25d4770334915d6298
+item_num = 512
