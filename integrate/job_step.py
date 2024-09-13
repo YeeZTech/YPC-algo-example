@@ -1,6 +1,6 @@
 import common
 import json
-
+import struct
 
 class job_step:
     def gen_key(crypto, shukey_file):
@@ -136,6 +136,18 @@ class job_step:
         with open(decrypted_result) as f:
             return f.readlines()
 
+    def decrypt_result_file(crypto, encrypted_result, shukey_file, decrypted_result):
+        param = {
+            "crypto": crypto,
+            "decrypt": "",
+            "use-param-file": encrypted_result,
+            "use-privatekey-file": shukey_file,
+            "output": decrypted_result
+        }
+        r = common.fid_terminus(**param)
+        with open(decrypted_result, 'rb') as f:
+            return f.readlines()
+
     def decrypt_result_key(crypto, encrypted_result, shukey_file, decrypted_result):
         param = {
             "crypto": crypto,
@@ -149,6 +161,23 @@ class job_step:
             key = bytearray(f.read())
             return ''.join(format(x, '02x') for x in key)
             # return f.readlines()
+    
+    def save_as_image(input_file, image):
+        width = image['width']
+        height = image['height']
+        channels = image['channels']
+        output_file = image['output_file']
+        param = {
+            "input-file": input_file,
+            "width": width,
+            "height": height,
+            "channels": channels,
+            "output-file": output_file
+        }
+        r = common.fid_converter(**param)
+        re =  "done save_as_image with cmd: " + r[0]
+        return re
+
 
     def decrypt_result_with_hex(crypto, encrypted_result, shukey, decrypted_result):
         param = {

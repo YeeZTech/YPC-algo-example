@@ -17,5 +17,5 @@ set(CMAKE_ARCHIVE_OUTPUT_DIRECTORY ${PROJECT_SOURCE_DIR}/lib/)
 message(STATUS "lib: " ${YPC_LIB_DIR})
 message(STATUS "inc: " ${YPC_INCLUDE_DIR})
 
-add_subdirectory(example)
+add_subdirectory(src)
 add_subdirectory(integrate)

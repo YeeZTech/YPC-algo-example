@@ -10,7 +10,7 @@ if __name__ == "__main__":
     crypto = "stdeth"
 
     name = "iris"
-    data = os.path.join(common.example_bin, "iris.data")
+    data = os.path.join(common.example_data, "iris.data")
     parser = os.path.join(common.example_lib, "iris_parser.signed.so")
     plugin = os.path.join(common.example_lib, "libiris_reader.so")
     input_param = "123"

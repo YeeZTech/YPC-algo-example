@@ -9,7 +9,7 @@ import project
 current_file = os.path.abspath(__file__)
 integrate_dir = os.path.dirname(current_file)
 example_dir = os.path.dirname(integrate_dir).replace(" ", "\ ")
-example_bin = os.path.join(example_dir, "./bin")
+example_data = os.path.join(example_dir, "./data")
 example_lib = os.path.join(example_dir, "./lib")
 
 ypc_lib = os.path.join(project.ypc_lib_dir(), "./")
@@ -127,6 +127,13 @@ def iris_data(**kwargs):
 
 def iris_model(**kwargs):
     cmd = os.path.join(ypc_bin, "./iris_gen_model")
+    for k, v in kwargs.items():
+        cmd = cmd + " --{} {}".format(k, v)
+    output = execute_cmd(cmd)
+    return [cmd, output]
+
+def fid_converter(**kwargs):
+    cmd = os.path.join(ypc_bin, "./save_image")
     for k, v in kwargs.items():
         cmd = cmd + " --{} {}".format(k, v)
     output = execute_cmd(cmd)

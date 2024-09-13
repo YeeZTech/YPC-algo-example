@@ -5,7 +5,7 @@ from job_step import job_step
 
 
 class classic_job:
-    def __init__(self, crypto, name, data_url, parser_url, plugin_url, input_param, config={}):
+    def __init__(self, crypto, name, data_url, parser_url, plugin_url, input_param, config={}, image_config={}):
         self.crypto = crypto
         self.name = name
         self.data_url = data_url
@@ -14,6 +14,7 @@ class classic_job:
         self.input = input_param
         self.all_outputs = list()
         self.config = config
+        self.image_config = image_config
 
     def run(self):
         '''
@@ -96,6 +97,10 @@ class classic_job:
         result_json = job_step.fid_analyzer(shukey_json, rq_forward_json, enclave_hash, input_data,
                                             self.parser_url, pkey, {}, self.crypto, param_json, [], parser_input_file, parser_output_file)
 
+        encrypted_result_file = self.name + ".encrypted.result"                    
+        with open(encrypted_result_file, "w") as of:
+            of.write(result_json["encrypted_result"])
+
         summary['encrypted-result'] = result_json["encrypted_result"]
         summary["result-signature"] = result_json["result_signature"]
         summary["cost-signature"] = result_json["cost_signature"]
@@ -105,12 +110,21 @@ class classic_job:
         self.all_outputs.append(parser_output_file)
         self.all_outputs.append(self.name + ".summary.json")
         self.all_outputs.append("info.json")
+        self.all_outputs.append(encrypted_result_file)
 
         # 6. call terminus to decrypt
-        encrypted_result = summary["encrypted-result"]
+        # encrypted_result = summary["encrypted-result"]
         decrypted_result = self.name + ".result"
-        self.result = job_step.decrypt_result(
-            self.crypto, encrypted_result, key_file, decrypted_result)
+        # self.result = job_step.decrypt_result(
+        #     self.crypto, encrypted_result, key_file, decrypted_result)
+        # self.all_outputs.append(decrypted_result)
+        self.result = job_step.decrypt_result_file(
+            self.crypto, encrypted_result_file, key_file, decrypted_result)
         self.all_outputs.append(decrypted_result)
+        # 7. if is image, save as image
+        if 'isImage' in self.config and self.config['isImage']:
+            self.result = job_step.save_as_image(
+                decrypted_result, self.image_config)
+        
         if 'remove-files' in self.config and self.config['remove-files']:
             job_step.remove_files(self.all_outputs)
