@@ -5,7 +5,6 @@
 #include "ypc/corecommon/crypto/stdeth.h"
 
 using Crypto = ypc::crypto::eth_sgx_crypto;
-// using Crypto = ypc::crypto::gmssl_sgx_crypto;
 
 ypc::algo_wrapper<Crypto, ypc::sealed_data_stream, enclave_iris_means_parser,
                   ypc::onchain_result<Crypto>>

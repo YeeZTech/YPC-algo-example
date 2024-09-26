@@ -9,8 +9,9 @@ import project
 current_file = os.path.abspath(__file__)
 integrate_dir = os.path.dirname(current_file)
 example_dir = os.path.dirname(integrate_dir).replace(" ", "\ ")
-example_data = os.path.join(example_dir, "./data")
-example_lib = os.path.join(example_dir, "./lib")
+data_dir = os.path.join(example_dir, "./data")
+lib_dir = os.path.join(example_dir, "./lib")
+bin_dir = os.path.join(example_dir, "./bin")
 
 ypc_lib = os.path.join(project.ypc_lib_dir(), "./")
 ypc_bin = os.path.join(ypc_lib, "../bin")
@@ -61,6 +62,10 @@ def fid_keymgr_list(crypto="stdeth"):
 
     return keys
 
+def debug_postfix():
+    cmd = 'ldd {}/keymgr_tool | grep libsgx_urts'.format(ypc_bin)
+    output = execute_cmd(cmd)
+    return project.debug_postfix() if 'sim' in output else str()
 
 def get_keymgr_private_key(keyid, crypto_type="stdeth"):
     cmd = os.path.join(ypc_bin, "./keymgr_tool")
