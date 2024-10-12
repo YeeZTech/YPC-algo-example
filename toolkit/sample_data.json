@@ -1,0 +1,13 @@
+{
+    "schema": [
+        {
+            "name": "name",
+            "type": "std::string"
+        },
+        {
+            "name": "age",
+            "type": "int"
+        }
+    ],
+    "type":"csv"
+}
