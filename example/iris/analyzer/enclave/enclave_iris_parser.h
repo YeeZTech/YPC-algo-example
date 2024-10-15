@@ -81,47 +81,13 @@ protected:
   user_item_t m_data;
 };
 
-class enclave_iris_parser {
-public:
-  enclave_iris_parser(ypc::data_source<stbox::bytes> *source)
-      : m_source(source){};
-
-  inline stbox::bytes do_parse(const stbox::bytes &param) {
-    ypc::to_type<stbox::bytes, extra_nt_t> converter(m_source);
-    transform_format trans(&converter);
-
-    hpda::algorithm::kmeans::kmeans_processor<
-        hpda::ntobject<iris_data, species>, iris_data, double, iid>
-        km(&trans, 3, 0.001);
-
-    hpda::output::memory_output<iris_data, species, iid> mo(
-        km.data_with_cluster_stream());
-
-    mo.get_engine()->run();
-    stbox::bytes result;
-    int i = 0;
-    for (auto it : mo.values()) {
-      result += it.get<species>();
-      result += " - ";
-      result += std::to_string(it.get<iid>());
-      result += "\n";
-      i++;
-      // LOG(INFO) << i << ": " << it.get<species>() << " - "
-      //<< std::to_string(it.get<iid>());
-    }
-    return result;
-  }
-
-protected:
-  ypc::data_source<stbox::bytes> *m_source;
-};
-
 class enclave_iris_means_parser {
 public:
   enclave_iris_means_parser(ypc::data_source<stbox::bytes> *source)
       : m_source(source){};
 
   inline stbox::bytes do_parse(const stbox::bytes &param) {
+    LOG(INFO) << "param: " << param;
     ypc::to_type<stbox::bytes, extra_nt_t> converter(m_source);
     transform_format trans(&converter);
 

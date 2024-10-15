@@ -1,0 +1,3 @@
+add_library(business_csv_reader SHARED reader.cpp)
+target_link_libraries(business_csv_reader pthread ff_net)
+install(TARGETS business_csv_reader DESTINATION lib)
